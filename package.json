@@ -1,0 +1,52 @@
+{
+  "name": "home-app",
+  "version": "0.0.1",
+  "description": "Home app para uso diario para Linux",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "clean": "node clean.js",
+    "make": "npm run clean && electron-forge make",
+    "build": "electron-builder",
+    "package-linux" : "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
+    "pack": "npm run build --dir",
+    "dist": "build"
+  },
+  "keywords": [
+    "Home"
+  ],
+  "author": "Fabricio Jordán",
+  "license": "ISC",
+  "build": {
+    "appId": "home-app-fjordan",
+    "asar": true,
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "@webpack-cli/generators": "^3.0.7",
+    "electron": "^30.0.3",
+    "electron-builder": "^25.1.8",
+    "tailwindcss": "^3.4.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "electron-shutdown-command": "^2.0.1",
+    "electron-squirrel-startup": "^1.0.1"
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/*
+package-lock.json
+.Identifier
+out/
+release-builds/
+node_modules
+.vscode/
+.idea/
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

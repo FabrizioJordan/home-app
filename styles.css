@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/*  npx tailwindcss build
+*/
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(./assets/fonts/Montserrat.ttf);
+    font-display: fallback;
+   }
+
+/* Tu CSS personalizado aquí */
+body {
+    font-family: 'Montserrat', system-ui, -apple-system, Ubuntu, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+
+/* Loader*/
+.spinner {
+    width: 44px;
+    height: 44px;
+    animation: spinner-y0fdc1 2s infinite ease;
+    transform-style: preserve-3d;
+   }
+   
+   .spinner > div {
+    background-color: rgb(228 0 255 / 7%);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    border: 2px solid #44134b;
+   }
+   
+   .spinner div:nth-of-type(1) {
+    transform: translateZ(-22px) rotateY(180deg);
+   }
+   
+   .spinner div:nth-of-type(2) {
+    transform: rotateY(-270deg) translateX(50%);
+    transform-origin: top right;
+   }
+   
+   .spinner div:nth-of-type(3) {
+    transform: rotateY(270deg) translateX(-50%);
+    transform-origin: center left;
+   }
+   
+   .spinner div:nth-of-type(4) {
+    transform: rotateX(90deg) translateY(-50%);
+    transform-origin: top center;
+   }
+   
+   .spinner div:nth-of-type(5) {
+    transform: rotateX(-90deg) translateY(50%);
+    transform-origin: bottom center;
+   }
+   
+   .spinner div:nth-of-type(6) {
+    transform: translateZ(22px);
+   }
+   
+   @keyframes spinner-y0fdc1 {
+    0% {
+     transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+    }
+   
+    50% {
+     transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+    }
+   
+    100% {
+     transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+    }
+   }
+
+    .loader {
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 20px;
+    animation: l1 .8s linear infinite alternate;
+  }
+  .loader:before {
+    content:"Loading...";
+    color: #818181;
+  }
+  @keyframes l1 {to{opacity: 0}}
+
+
+  .divLoader-out{
+    top: -1000px;
+  }
+
+
+
+
+
+
+  
+.terminal_toolbar {
+  padding: 0 8px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.btn {
+  padding: 0;
+  margin-right: 5px;
+  font-size: 8px;
+  border: none;
+  border-radius: 100%;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 1px 0px #41403a, 0px 1px 1px 0px #474642;
+  background: linear-gradient(#7d7871 0%, #595953 100%);
+}
+
+.btn-color{
+  background: #ee411a;
+}
