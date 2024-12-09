@@ -10,22 +10,21 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem(FIRST_RUN_KEY, 'true');
     }
 
-const { app, ipcRenderer } = require('electron');
+const { ipcRenderer } = require('electron');
 
-
-console.log(app)
 
 const $ = selector => document.querySelector(selector)
 /*const $count = $('#count')
 
 $button.addEventListener('click', () => {
-  const count = +$count.innerHTML
+  const count = +$coprocess.env.TERMunt.innerHTML
   $count.innerHTML = (count + 1).toString()
 })
 */
 
 const platform = process.platform;
     
+console.log(process.env.TERM)
 
  // Función para ejecutar un comando y manejar el resultado
 window.executeAndHandleResult = async (commandName, resultHandler) => {
@@ -47,7 +46,6 @@ executeAndHandleResult('getWindowsType', windowsType => {
     const sanitizedWindowsType = windowsType.replace("Microsoft ", "");
     $('.system').innerHTML = sanitizedWindowsType;
     $('.systemType').innerHTML = "Windows";
-    $('#windowManager').innerHTML = "DWM";
 
     // para saber el nombre de usuario para modificar el elemento
     $('#userName').innerHTML = process.env.USERNAME;
@@ -67,9 +65,19 @@ $openWebExplorer.addEventListener('click', () => {
     executeCommandWithoutResponse(`xdg-open https://google.com`);
 })
 
-const $openVSCode = $('#openVSCode')
-$openVSCode.addEventListener('click', () => {
-    executeCommandWithoutResponse('code');
+const $openFileManager = $('#openFileManager')
+$openFileManager.addEventListener('click', () => {
+    executeCommandWithoutResponse(`$(xdg-mime query default inode/directory | awk -F. '{print $1}')`);
+})
+
+const $openCodeEditor = $('#openCodeEditor')
+$openCodeEditor.addEventListener('click', () => {
+    executeCommandWithoutResponse('code || cursor');
+})
+
+const $openDiscord = $('#openDiscord')
+$openDiscord.addEventListener('click', () => {
+    executeCommandWithoutResponse(`discord`);
 })
 
 
@@ -79,32 +87,20 @@ $newTerminal.addEventListener('click', () => {
 })
 
 function newSystemTerminal(){
-
     // Ejemplo de cómo usar la función para ejecutar un comando sin esperar respuesta
-    executeCommandWithoutResponse('kitty');
-    
+    // reconocer que terminal usar en linux
+    executeCommandWithoutResponse('kitty || konsole || xfce4-terminal || gnome-terminal || xterm');
 }
 
-
-if (platform === "linux"){
-
-
-    const $openDiscord = $('#openDiscord')
-    $openDiscord.addEventListener('click', () => {
-        executeCommandWithoutResponse(`discord`);
-    })
-
-    let linuxDistro1 = "";
 
 
         executeAndHandleResult('getLinuxDistro', linuxDistro => {
             $('.system').innerHTML = linuxDistro;
-            linuxDistro1 = linuxDistro;
-            useLinuxDistroImg();
+            useLinuxDistroImg(linuxDistro);
         });
 
-        function useLinuxDistroImg() {
-            const distro = linuxDistro1.toLowerCase()
+        function useLinuxDistroImg(linuxDistro) {
+            const distro = linuxDistro.toLowerCase()
             const $distro_image = $('#distro_Image');
 
             switch (distro) {
@@ -136,21 +132,26 @@ if (platform === "linux"){
                     $distro_image.src = "public/icons/distros/suse_linux.png";
                     break;
                 default:
-                    console.error("Distro no reconocida:", distro);
+                    console.error("Distro not recognized:", distro);
             }
         }
 
+    // Function to get the desktop manager
     executeAndHandleResult('getLinuxDesktop', linuxDesktop => {
         $('.systemType').innerHTML = linuxDesktop
     });
 
-    // Función para saber el nombre de usuario para modificar el elemento
+    // Function to get the user name
     executeAndHandleResult('getLinuxUserName', userName => {
         $('#userName').innerHTML = userName;
     });
 
+    // Function to get the window manager
+    executeAndHandleResult('getLinuxWM', linuxWM => {
+        console.log('Linux Window Manager:', linuxWM);
+        $('#windowManager').innerHTML = linuxWM;
+    });
 
-}
 
 
 // change avatar - variables
@@ -195,12 +196,11 @@ window.addEventListener('load', () => {
 $('#changeDesktop').addEventListener('click', () => {
     $('#menuDesktop').classList.toggle('hidden')
 })
-if(platform === 'linux'){
+
     $('#btnChangeDesktop').addEventListener('click', () => {              //cambiar escritorio
         executeCommandWithoutResponse('bspc quit');
         executeCommandWithoutResponse('cinnamon-session-quit --no-prompt');
     })
-}
 
 
 // loader
@@ -258,9 +258,4 @@ if(langProcess === "en_US"){
 
 
 
-
-
-
-
 });
-

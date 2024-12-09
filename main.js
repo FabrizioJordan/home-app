@@ -3,7 +3,6 @@ const { app, BrowserWindow, Menu, ipcMain } =  require('electron')
 const { setMainMenu } = require('./src/menu.js')
 const exec = require('child_process').exec;
 
-
 //         
 
 // Define los comandos que deseas ejecutar y su identificador asociado
@@ -15,6 +14,7 @@ const commands = {
     linux: {
         getLinuxDesktop: 'echo $XDG_SESSION_DESKTOP',
         getLinuxDistro: 'lsb_release -d | awk -F"\t" \'{print $2}\' | awk \'{print $1, $2}\'',
+        getLinuxWM: "wmctrl -m | awk -F' ' '{print $2}' | head -n 1",
         getLinuxUserName: 'whoami',
         getLinuxHomeFiles: 'ls -lah',
         getLinuxDocumentsFiles: 'ls -1 $HOME/Documents',
@@ -37,7 +37,7 @@ const executeCommand = (command) => {
                 return;
             }
             if (stderr) {
-                console.error(`Error de la terminal: ${stderr}`);
+                console.error(`Terminal error: ${stderr}`);
                 resolve(null);
                 return;
             }
@@ -50,7 +50,7 @@ const executeCommand = (command) => {
 ipcMain.handle('executeCommand', async (event, commandName) => {
     const command = getCommandForPlatform(commandName);
     if (!command) {
-        console.error(`Comando desconocido: ${commandName}`);
+        console.error(`Command not found: ${commandName}`);
         return null;
     }
     return await executeCommand(command);
@@ -68,12 +68,11 @@ const getCommandForPlatform = (commandName) => {
 // Define los manejadores de eventos para ejecutar comandos sin devolver resultados
 ipcMain.on('executeCommandWithoutResponse', (event, commandName) => {
     if (!commandName) {
-        console.error(`Comando desconocido: ${commandName}`);
+        console.error(`Command not found: ${commandName}`);
         return;
     }
     executeCommand(commandName)
-        .then(() => console.log(`Comando ejecutado : ${commandName}`))
-        .catch(error => console.error(`Error al ejecutar ${commandName}:`, error));
+        .catch(error => console.error(`Execute command ${commandName} error:`, error));
 });
 
 
