@@ -1,7 +1,7 @@
 {
   "name": "home-app",
-  "version": "0.0.1",
-  "description": "Home app para uso diario para Linux",
+  "version": "0.0.2",
+  "description": "Home App for Daily Linux Use",
   "main": "main.js",
   "scripts": {
     "dev": "electron .",
