@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'Montserrat';
-    src: url(./assets/fonts/Montserrat.ttf);
+    src: url(public/fonts/Montserrat.ttf);
     font-display: fallback;
    }
 

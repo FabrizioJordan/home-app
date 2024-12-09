@@ -1,11 +1,13 @@
 
+const $ = selector => document.querySelector(selector)
+
 // variables 
-const homeBtn = document.getElementById('showHomeView')
-const documentsBtn = document.getElementById('showDocumentsView')
-const downloadsBtn = document.getElementById('showDownloadsView')
-const musicBtn = document.getElementById('showMusicView')
-const photosBtn = document.getElementById('showPhotosView')
-const videosBtn = document.getElementById('showVideosView')
+const $homeBtn = document.getElementById('showHomeView')
+const $documentsBtn = document.getElementById('showDocumentsView')
+const $downloadsBtn = document.getElementById('showDownloadsView')
+const $musicBtn = document.getElementById('showMusicView')
+const $photosBtn = document.getElementById('showPhotosView')
+const $videosBtn = document.getElementById('showVideosView')
 
 
 // ID de la vista actual guardado en localStorage
@@ -34,6 +36,7 @@ const hideAllViews = () => {
 
 homeInitialView()
 
+/*
 // code
 documentsBtn.addEventListener('click', () => {
     showView('documentsView');
@@ -55,6 +58,7 @@ videosBtn.addEventListener('click', () => {
     showView('videosView');
     executeAndHandleResult('getWindowsVideosFiles', 'listOfVideosFiles');
 });
+*/
 
 // function to show new view
 function showView(viewId) {

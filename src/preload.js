@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem(FIRST_RUN_KEY, 'true');
     }
 
-const { ipcRenderer } = require('electron');
+const { app, ipcRenderer } = require('electron');
+
+
+console.log(app)
 
 const $ = selector => document.querySelector(selector)
 /*const $count = $('#count')
@@ -37,7 +40,8 @@ window.executeAndHandleResult = async (commandName, resultHandler) => {
 };
 
 
-// Ejemplo de cómo usar la función para ejecutar y manejar un comando
+if(platform === "win32"){
+    // Ejemplo de cómo usar la función para ejecutar y manejar un comando
 executeAndHandleResult('getWindowsType', windowsType => {
 
     const sanitizedWindowsType = windowsType.replace("Microsoft ", "");
@@ -45,23 +49,12 @@ executeAndHandleResult('getWindowsType', windowsType => {
     $('.systemType').innerHTML = "Windows";
     $('#windowManager').innerHTML = "DWM";
 
-    const $distro_image = $('#distro_Image')
-
-    if ($distro_image) {
-        // Continuar solo si el elemento existe
-        if (windowsType.includes("Microsoft Windows 11")) {
-            $distro_image.src = "./assets/icons/distros/Windows11_logo.ico";
-        } else if (windowsType.includes("Microsoft Windows 10")) {
-            $distro_image.src = "./assets/icons/distros/Windows10_logo.ico";
-        }
-    } else {
-        console.error("El elemento 'distro_Image' no se encontró en el DOM.");
-    }
-
     // para saber el nombre de usuario para modificar el elemento
     $('#userName').innerHTML = process.env.USERNAME;
 
-});
+    });
+}
+
 
     // Función para ejecutar un comando sin esperar una respuesta
     const executeCommandWithoutResponse = (commandName) => {
@@ -71,11 +64,7 @@ executeAndHandleResult('getWindowsType', windowsType => {
 
 const $openWebExplorer = $('#openWebExplorer')
 $openWebExplorer.addEventListener('click', () => {
-    if(platform == "win32"){
-        executeCommandWithoutResponse('start https://google.com');
-    }else if(platform == "linux"){
-        executeCommandWithoutResponse(`xdg-open https://google.com`);
-    }
+    executeCommandWithoutResponse(`xdg-open https://google.com`);
 })
 
 const $openVSCode = $('#openVSCode')
@@ -84,21 +73,6 @@ $openVSCode.addEventListener('click', () => {
 })
 
 
-if(platform === 'win32') {
-
-    const $openDiscord = $('#openDiscord')
-    const discordPath = `start "" "%LocalAppData%\Discord\Update.exe" --processStart Discord.exe`;
-    $openDiscord.addEventListener('click', () => {
-        executeCommandWithoutResponse(`node openDiscord.js`);
-    })
-        
-    const $openFolders = $('#openFolders')
-    $openFolders.addEventListener('click', () => {
-        executeCommandWithoutResponse('explorer');
-    })
-
-}
-    
 const $newTerminal = $('#newTerminal')
 $newTerminal.addEventListener('click', () => {
     newSystemTerminal()
@@ -107,15 +81,10 @@ $newTerminal.addEventListener('click', () => {
 function newSystemTerminal(){
 
     // Ejemplo de cómo usar la función para ejecutar un comando sin esperar respuesta
-    if(platform === "win32"){
-        executeCommandWithoutResponse('start cmd');
-    }else if(platform === "linux"){
-        executeCommandWithoutResponse('kitty');
-    }else if(platform === "darwin"){
-        executeCommandWithoutResponse('open -a Terminal');
-    }
+    executeCommandWithoutResponse('kitty');
     
 }
+
 
 if (platform === "linux"){
 
@@ -125,53 +94,46 @@ if (platform === "linux"){
         executeCommandWithoutResponse(`discord`);
     })
 
+    let linuxDistro1 = "";
 
-        let linuxDistro1 = "";
-        let linuxDistro2 = "";
 
         executeAndHandleResult('getLinuxDistro', linuxDistro => {
-            $system.innerHTML = linuxDistro;
+            $('.system').innerHTML = linuxDistro;
             linuxDistro1 = linuxDistro;
             useLinuxDistroImg();
         });
 
-        executeAndHandleResult('getLinuxDistro2', linuxDistro => {
-            $system.innerHTML = linuxDistro;
-            linuxDistro2 = linuxDistro;
-            useLinuxDistroImg();
-        });
-
         function useLinuxDistroImg() {
-            const distro = linuxDistro1.toLowerCase() || linuxDistro2.toLowerCase();
+            const distro = linuxDistro1.toLowerCase()
             const $distro_image = $('#distro_Image');
 
             switch (distro) {
-                case 'arch':
-                    $distro_image.src = "./assets/icons/distros/arch_linux.ico";
-                    break;
-                case 'mint':
-                    $distro_image.src = "./assets/icons/distros/mint_linux.ico";
+                case 'arch linux':
+                    $distro_image.src = "public/icons/distros/arch_linux.png";
                     break;
                 case 'ubuntu':
-                    $distro_image.src = "./assets/icons/distros/ubuntu_linux.ico";
+                    $distro_image.src = "public/icons/distros/ubuntu_linux.png";
+                    break;
+                case 'linux mint':
+                    $distro_image.src = "public/icons/distros/mint-linux.png";
                     break;
                 case 'fedora':
-                    $distro_image.src = "./assets/icons/distros/fedora_linux.ico";
+                    $distro_image.src = "public/icons/distros/fedora_linux.png";
                     break;
-                case 'debian':
-                    $distro_image.src = "./assets/icons/distros/debian_linux.ico";
+                case 'debian gnu/linux':
+                    $distro_image.src = "public/icons/distros/debian_linux.png";
                     break;
-                case 'zorin':
-                    $distro_image.src = "./assets/icons/distros/zorin_linux.ico";
+                case 'zorin os':
+                    $distro_image.src = "public/icons/distros/zorin_linux.png";
                     break;
                 case 'centos':
-                    $distro_image.src = "./assets/icons/distros/centos_linux.ico";
+                    $distro_image.src = "public/icons/distros/centos_linux.png";
                     break;
-                case 'redhat':
-                    $distro_image.src = "./assets/icons/distros/redhat_linux.ico";
+                case 'red hat':
+                    $distro_image.src = "public/icons/distros/redhat_linux.png";
                     break;
-                case 'suse':
-                    $distro_image.src = "./assets/icons/distros/suse_linux.ico";
+                case 'suse linux':
+                    $distro_image.src = "public/icons/distros/suse_linux.png";
                     break;
                 default:
                     console.error("Distro no reconocida:", distro);
@@ -179,13 +141,11 @@ if (platform === "linux"){
         }
 
     executeAndHandleResult('getLinuxDesktop', linuxDesktop => {
-        console.log(`Entorno de escritorio: ${linuxDesktop}`);
-        $systemType.innerHTML = linuxDesktop
+        $('.systemType').innerHTML = linuxDesktop
     });
 
     // Función para saber el nombre de usuario para modificar el elemento
     executeAndHandleResult('getLinuxUserName', userName => {
-        console.log(`Nombre de usuario (L): ${userName}`);
         $('#userName').innerHTML = userName;
     });
 
@@ -243,35 +203,6 @@ if(platform === 'linux'){
 }
 
 
-$('#distro_Image').addEventListener('click', () => {
-    $('#menuLogOut').classList.toggle('hidden')
-})
-
-$('#logOut').addEventListener('click', () => {              //cerrar sesión
-    if(platform === 'linux'){
-        executeCommandWithoutResponse('gnome-session-quit --logout');
-    }else if(platform === 'win32'){
-        executeCommandWithoutResponse('logoff');
-    }
-})
-
-$('#powerOff').addEventListener('click', () => {            //apagar
-    if(platform === 'linux'){
-        executeCommandWithoutResponse('gnome-session-quit --power-off');
-    }else if(platform === 'win32'){
-        executeCommandWithoutResponse('shutdown /s /t 5');
-    }
-})
-
-$('#reboot').addEventListener('click', () => {              //reiniciar
-    if(platform === 'linux'){
-        executeCommandWithoutResponse('gnome-session-quit --reboot');
-    }else if(platform === 'win32'){
-        executeCommandWithoutResponse('shutdown /r');
-    }
-})
-
-
 // loader
 setTimeout(() => {
     $('#divLoader').classList.add('divLoader-out');
@@ -282,7 +213,7 @@ setTimeout(() => {
 }, 500)
 
 
-
+/*
 /// Listado de archivos en Windows
 executeAndHandleResult('getWindowsHomeFiles', files => {
     const filteredFiles = files.split('\n').filter(line => !line.includes('P�gina de c�digos activa: 65001')).join('\n');
@@ -298,13 +229,13 @@ executeAndHandleResult('getWindowsHomeFiles', files => {
         fileListContainer.appendChild(fileElement);
     });
 });
-
+*/
 
 const userConsole = document.querySelectorAll('.userConsole')
 for(let a = 0; a < userConsole.length; a++) {
-    userConsole[a].innerHTML = `${process.env.USERNAME}@${process.env.USERNAME}`;
+    userConsole[a].innerHTML = "user";
     if(userConsole[a].tagName === 'SPAN') {
-        userConsole[a].innerHTML = `${process.env.USERNAME}@${process.env.USERNAME.charAt(0).toUpperCase() + process.env.USERNAME.slice(1)}`;
+        userConsole[a].innerHTML = "User";
     }
 }
 
@@ -317,11 +248,6 @@ if(langProcess === "en_US"){
     systemLanguage = "en_US";
 } else if(langProcess === "es_ES"){
     systemLanguage = "es_ES";
-}
-
-let documentsPath = `C:\\Users\\${process.env.USERNAME}\\Documents`;
-if (systemLanguage === "es_ES"){
-    documentsPath = `C:\\Users\\${process.env.USERNAME}\\Documentos`;
 }
 
 

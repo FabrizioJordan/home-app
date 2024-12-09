@@ -7,10 +7,10 @@
     "dev": "electron .",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "clean": "node clean.js",
+    "clean": "node ./src/scripts/clean.js",
     "make": "npm run clean && electron-forge make",
     "build": "electron-builder",
-    "package-linux" : "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
+    "package-linux" : "electron-packager . --overwrite --platform=linux --arch=x64 --icon=public/icons/png/icon.png --prune=true --out=release-builds",
     "pack": "npm run build --dir",
     "dist": "build"
   },

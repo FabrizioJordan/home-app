@@ -1,0 +1,15 @@
+
+
+const shutdown = require('electron-shutdown-command');
+
+$('#logOut').addEventListener('click', () => {              //cerrar sesión
+        executeCommandWithoutResponse('gnome-session-quit --logout');
+})
+
+$('#powerOff').addEventListener('click', () => {            //apagar
+        executeCommandWithoutResponse('gnome-session-quit --power-off');
+})
+
+$('#reboot').addEventListener('click', () => {              //reiniciar
+        executeCommandWithoutResponse('gnome-session-quit --reboot');
+})

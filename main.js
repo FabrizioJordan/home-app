@@ -1,9 +1,7 @@
 const path = require('path');
 const { app, BrowserWindow, Menu, ipcMain } =  require('electron')
-const { setMainMenu } = require('./menu.js')
+const { setMainMenu } = require('./src/menu.js')
 const exec = require('child_process').exec;
-
-const shutdown = require('electron-shutdown-command');
 
 
 //         
@@ -13,17 +11,10 @@ const commands = {
     win32: {
         getWindowsType: 'wmic os get caption | findstr /v "Caption"',
         getWindowsHomeFiles: 'chcp 65001 & dir /a /b C:\\Users\\%USERNAME% | findstr /I /V /R "^\\..* ^ntuser.* ^NTUSER.*" | findstr /V /C:"Página de códigos activa: 65001"',
-        getWindowsDocumentsFiles: 'chcp 65001 & dir /a /b C:\\Users\\%USERPROFILE%\\Documents | findstr /I /V /R "^\\..* ^ntuser.* ^NTUSER.*" | findstr /V /C:"Página de códigos activa: 65001"',
-        getWindowsDownloadsFiles: 'chcp 65001 & dir /a /b C:\\Users\\%USERPROFILE%\\Downloads | findstr /I /V /R "^\\..* ^ntuser.* ^NTUSER.*" | findstr /V /C:"Página de códigos activa: 65001"',
-        getWindowsMusicFiles: 'chcp 65001 & dir /a /b C:\\Users\\%USERPROFILE%\\Music | findstr /I /V /R "^\\..* ^ntuser.* ^NTUSER.*" | findstr /V /C:"Página de códigos activa: 65001"',
-        getWindowsPicturesFiles: 'chcp 65001 & dir /a /b C:\\Users\\%USERPROFILE%\\Pictures | findstr /I /V /R "^\\..* ^ntuser.* ^NTUSER.*" | findstr /V /C:"Página de códigos activa: 65001"',
-        getWindowsVideosFiles: 'chcp 65001 & dir /a /b C:\\Users\\%USERPROFILE%\\Videos | findstr /I /V /R "^\\..* ^ntuser.* ^NTUSER.*" | findstr /V /C:"Página de códigos activa: 65001"'
-        //getWindowsListOfFiles: 'Get-ChildItem -Force | Format-Table Name,Length,Mode,LastWriteTime,Attributes -AutoSize'
     },
     linux: {
         getLinuxDesktop: 'echo $XDG_SESSION_DESKTOP',
-        getLinuxDistro: 'lsb_release -d | cut -f2 | sed \'s/ LTS//\'',
-        getLinuxDistro2: `cat /etc/*release | grep -w 'ID' | cut -d'=' -f2"`,
+        getLinuxDistro: 'lsb_release -d | awk -F"\t" \'{print $2}\' | awk \'{print $1, $2}\'',
         getLinuxUserName: 'whoami',
         getLinuxHomeFiles: 'ls -lah',
         getLinuxDocumentsFiles: 'ls -1 $HOME/Documents',
@@ -88,14 +79,13 @@ ipcMain.on('executeCommandWithoutResponse', (event, commandName) => {
 
 
 
-
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
         width: 1000,
         height: 700,
         minHeight: 400,
         minWidth: 400,
-        icon:  path.join(__dirname, "/assets/icons/home.ico"),
+        icon:  path.join(__dirname, "/public/icons/home1024x.png"),
         webPreferences: {
             preload: path.join(__dirname, './src/preload.js')
         }
@@ -104,6 +94,7 @@ const createWindow = () => {
 
     mainWindow.loadFile('index.html')
 
+    mainWindow.maximize()
       
     setMainMenu(mainWindow)
 }

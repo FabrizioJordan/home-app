@@ -11,7 +11,7 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />  
-    <link rel="stylesheet" href="../electron-app/src/output.css">
+    <link rel="stylesheet" href="../src/output.css">
     <title>Desktop App | Documentos</title>
 </head>
 <body class="body relative w-full h-screen bg-[#121417] text-white flex flex-row tracking-wide">
@@ -22,7 +22,7 @@
             
             <article class="relative flex flex-row justify-center items-center gap-4">
 
-                <img id="avatar" class="size-20 rounded-full cursor-pointer" src="../electron-app/assets/images/blank-profile-picture.png" alt="">
+                <img id="avatar" class="size-20 rounded-full cursor-pointer" src="../public/images/blank-profile-picture.png" alt="">
 
                 <nav id="nav_putAvatar" class="hidden absolute flex flex-col justify-center items-center top-20 left-24 p-1 text-sm bg-[#4b4f57] rounded-md ">
                     <button class="py-2 px-1 transition-colors duration-500 hover:bg-[#696775] rounded-md">
@@ -108,7 +108,7 @@
 
                         <span class="size-8">
                             <button class="relative">
-                                <img id="distro_Image" class="size-8" src="../electron-app/assets/icons/distros/Arch_Linux_icon.ico" alt="">
+                                <img id="distro_Image" class="size-8" src="../electron-app/public/icons/distros/Arch_Linux_icon.ico" alt="">
     
                                 <nav id="menuLogOut" class="hidden flex flex-col justify-center items-center absolute top-12 right-0 gap-4 bg-[#4b4f57] rounded-md p-2 text-xs cursor-auto
                                 [&>A]:transition-colors [&>A]:duration-500 hover:[&>A]:bg-[#696775] [&>A]:rounded-md [&>A]:p-1">
@@ -145,31 +145,31 @@
                     <li>
                         <a class="" href="/pages/documents.html">
                             Documentos
-                            <img class="" src="../electron-app/assets/images/user-dirs/documents.jpg" alt="">
+                            <img class="" src="../electron-app/public/images/user-dirs/documents.jpg" alt="">
                         </a>
                     </li>
                     <li>
                         <a href="">
                             Descargas
-                            <img class="" src="../electron-app/assets/images/user-dirs/downloads.jpg" alt="">
+                            <img class="" src="../electron-app/public/images/user-dirs/downloads.jpg" alt="">
                         </a>
                     </li>
                     <li>
                         <a href="">
                             Musica
-                            <img class="" src="../electron-app/assets/images/user-dirs/musica.jpg" alt="">
+                            <img class="" src="../electron-app/public/images/user-dirs/musica.jpg" alt="">
                         </a>
                     </li>
                     <li>
                         <a href="">
                             Fotos
-                            <img class="" src="../electron-app/assets/images/user-dirs/fotos.jpg" alt="">
+                            <img class="" src="../electron-app/public/images/user-dirs/fotos.jpg" alt="">
                         </a>
                     </li>
                     <li>
                         <a href="">
                             Videos
-                            <img class="" src="../electron-app/assets/images/user-dirs/videos.jpg" alt="">
+                            <img class="" src="../electron-app/public/images/user-dirs/videos.jpg" alt="">
                         </a>
                     </li>
                 </ul>

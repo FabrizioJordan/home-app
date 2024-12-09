@@ -890,7 +890,7 @@ video {
 @font-face {
   font-family: 'Montserrat';
 
-  src: url(../electron-app/assets/fonts/Montserrat.ttf);
+  src: url(../public/fonts/Montserrat.ttf);
 
   font-display: fallback;
 }
