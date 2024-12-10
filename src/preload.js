@@ -72,7 +72,7 @@ $openFileManager.addEventListener('click', () => {
 
 const $openCodeEditor = $('#openCodeEditor')
 $openCodeEditor.addEventListener('click', () => {
-    executeCommandWithoutResponse('code || cursor');
+    executeCommandWithoutResponse('code || code-oss');
 })
 
 const $openDiscord = $('#openDiscord')
