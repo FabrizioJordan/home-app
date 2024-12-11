@@ -24,7 +24,6 @@ $button.addEventListener('click', () => {
 
 const platform = process.platform;
     
-console.log(process.env.TERM)
 
  // Función para ejecutar un comando y manejar el resultado
 window.executeAndHandleResult = async (commandName, resultHandler) => {
@@ -148,7 +147,6 @@ function newSystemTerminal(){
 
     // Function to get the window manager
     executeAndHandleResult('getLinuxWM', linuxWM => {
-        console.log('Linux Window Manager:', linuxWM);
         $('#windowManager').innerHTML = linuxWM;
     });
 

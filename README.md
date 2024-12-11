@@ -1,6 +1,7 @@
 # 🚀 Welcome to Linux Home App!
 
 Home App for Daily Linux Use
+Built with Electron.
 
 
 App to do daily tasks on Linux.
@@ -15,7 +16,6 @@ Shortcuts :
 1. Terminal
 2. Browser
 3. Email
-4. Tasks
 5. Settings
 6. File manager
 7. Code editor

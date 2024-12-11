@@ -27,13 +27,13 @@
     "package": "electron-forge package --arch=x64 --platform=linux",
     "clean": "node ./src/scripts/clean.js",
     "build": "electron-builder",
-    "package-linux": "electron-packager . home-app --overwrite --platform=linux --arch=x64 --icon=public/icons/home1024x.png --prune=true --out=release-builds --app-version=0.0.2 --app-category=Productivity --name=home-app --executable-name=home-app"
+    "package-linux": "electron-packager . home-app --overwrite --platform=linux --arch=x64 --icon=public/icons/home1024x.png --prune=true --out=epackager-builds --app-version=0.0.2 --app-category=Productivity --name=home-app --executable-name=home-app"
   },
   "build": {
     "appId": "com.fabriziojordan.homeapp",
     "productName": "home-app",
     "directories": {
-      "output": "dist"
+      "output": "ebuilder-builds"
     },
     "linux": {
       "artifactName": "${productName}-${version}.${ext}",
@@ -47,7 +47,6 @@
     "@electron-forge/cli": "^7.4.0",
     "@electron-forge/maker-deb": "^7.4.0",
     "@electron-forge/maker-rpm": "^7.4.0",
-    "@electron-forge/maker-squirrel": "^7.4.0",
     "@electron-forge/maker-zip": "^7.4.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",

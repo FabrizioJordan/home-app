@@ -33,9 +33,13 @@ const deleteFolderRecursive = function (folderPath) {
 };
 
 // Directorio a limpiar
-const dir = path.join(__dirname, 'out');
+const dirOut = path.join(__dirname, 'out');
+const dirRelease = path.join(__dirname, 'release-builds');
+const dirDist = path.join(__dirname, 'dist');
 
-deleteFolderRecursive(dir);
+deleteFolderRecursive(dirOut);
+deleteFolderRecursive(dirRelease);
+deleteFolderRecursive(dirDist);
 
 // Crear el directorio si no existe
 if (!existsSync(dir)) {

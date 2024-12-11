@@ -13,5 +13,4 @@ exec(`start "" ${discordPath}`, (error, stdout, stderr) => {
     console.error(`Error en stderr: ${stderr}`);
     return;
   }
-  console.log(`Discord iniciado: ${stdout}`);
 });
