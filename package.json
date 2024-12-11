@@ -3,18 +3,13 @@
   "version": "0.0.2",
   "description": "Home App for Daily Linux Use",
   "main": "main.js",
-  "scripts": {
-    "dev": "electron .",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "clean": "node ./src/scripts/clean.js",
-    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=public/icons/home1024x1024.png --prune=true --out=release-builds",
-    "build": "electron-builder"
-  },
   "keywords": [
-    "Home"
+    "Home",
+    "Productivity",
+    "Linux",
+    "Ubuntu",
+    "Desktop"
   ],
-  "icon": "public/icons/home1024x.png",
   "author": {
     "name": "Fabricio Jordán",
     "email": "fabriziodevjordan@gmail.com",
@@ -25,6 +20,15 @@
     "registry": "https://npm.pkg.github.com"
   },
   "license": "ISC",
+  "icon": "public/icons/home1024x.png",
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron-forge start",
+    "package": "electron-forge package --arch=x64 --platform=linux",
+    "clean": "node ./src/scripts/clean.js",
+    "build": "electron-builder",
+    "package-linux": "electron-packager . home-app --overwrite --platform=linux --arch=x64 --icon=public/icons/home1024x.png --prune=true --out=release-builds --app-version=0.0.2 --app-category=Productivity --name=home-app --executable-name=home-app"
+  },
   "build": {
     "appId": "com.fabriziojordan.homeapp",
     "productName": "home-app",

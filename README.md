@@ -82,6 +82,12 @@ npm run package
 
 Contribute to the project:
 
+You need to modify the build options?
+For electron-packager modify the package.json file in the scripts section.
+For electron-forge modify the forge.config.js file. (or the package.json file in the scripts section)
+For electron-builder modify the package.json file in the build section.
+
+
 *You can add more features to the app with a PR.*
 
 By: Fabricio Jordán

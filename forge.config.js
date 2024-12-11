@@ -4,6 +4,10 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
+    icon: './public/icons/home1024x1024.png',
+    executableName: 'home-app',
+    name: 'home-app',
+    category: 'Productivity'
   },
   rebuildConfig: {},
   makers: [
@@ -13,11 +17,13 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin', 'linux'],
+      platforms: ['linux'],
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        target: 'deb',
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
