@@ -49,11 +49,11 @@ npm run dev
 ### To build the app for Linux:
 
 
-This project has three build formats:
+This project has three build options:
 
 
-With electron-packager:
-
+With electron-packager: (build in /release-builds)
+(This is the default build option)
 
 ```
 npm run package-linux
@@ -65,14 +65,14 @@ or
 yarn package-linux
 ```
 
-With electron-builder:
+With electron-builder: (build in /dist)
 
 
 ```
 npm run build
 ```
 
-With electron-forge:
+With electron-forge: (build in /out)
 
 
 ```
