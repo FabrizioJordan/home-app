@@ -46,10 +46,13 @@ npm run dev
 
 
 
-This project has been created using **electron-packager**.
-
-
 ### To build the app for Linux:
+
+
+This project has three build formats:
+
+
+With electron-packager:
 
 
 ```
@@ -60,6 +63,20 @@ or
 
 ```
 yarn package-linux
+```
+
+With electron-builder:
+
+
+```
+npm run build
+```
+
+With electron-forge:
+
+
+```
+npm run package
 ```
 
 
