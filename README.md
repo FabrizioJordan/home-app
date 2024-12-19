@@ -15,9 +15,9 @@ Shortcuts :
 
 1. Terminal
 2. Browser
-3. Email
-5. Settings
-6. File manager
+3. Email (in progress)
+5. Settings (in progress)
+6. File manager (in progress)
 7. Code editor
 
 *You can add more shortcuts to the app.*
@@ -52,7 +52,7 @@ npm run dev
 This project has three build options:
 
 
-With electron-packager: (build in /release-builds)
+With electron-packager: (build in /epackager-builds)
 (This is the default build option)
 
 ```
@@ -65,26 +65,42 @@ or
 yarn package-linux
 ```
 
-With electron-builder: (build in /dist)
+With electron-builder: (build in /ebuilder-builds)
 
 
 ```
 npm run build
 ```
 
-With electron-forge: (build in /out)
+or
+
+```
+yarn build
+```
+
+With electron-forge: (build in /eforge-builds)
 
 
 ```
 npm run package
 ```
 
+or
+
+```
+yarn package
+```
+
+
 
 Contribute to the project:
 
 You need to modify the build options?
+
 For electron-packager modify the package.json file in the scripts section.
+
 For electron-forge modify the forge.config.js file. (or the package.json file in the scripts section)
+
 For electron-builder modify the package.json file in the build section.
 
 

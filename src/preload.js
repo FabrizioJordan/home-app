@@ -71,7 +71,7 @@ $openFileManager.addEventListener('click', () => {
 
 const $openCodeEditor = $('#openCodeEditor')
 $openCodeEditor.addEventListener('click', () => {
-    executeCommandWithoutResponse('code || code-oss');
+    executeCommandWithoutResponse('code || code-oss || cursor');
 })
 
 const $openDiscord = $('#openDiscord')
@@ -84,13 +84,11 @@ const $newTerminal = $('#newTerminal')
 $newTerminal.addEventListener('click', () => {
     newSystemTerminal()
 })
-
 function newSystemTerminal(){
     // Ejemplo de cómo usar la función para ejecutar un comando sin esperar respuesta
     // reconocer que terminal usar en linux
     executeCommandWithoutResponse('kitty || konsole || xfce4-terminal || gnome-terminal || xterm');
 }
-
 
 
         executeAndHandleResult('getLinuxDistro', linuxDistro => {
