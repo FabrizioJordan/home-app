@@ -1,5 +1,7 @@
-
 const $ = selector => document.querySelector(selector)
+
+// vistas
+
 
 // variables 
 const $homeBtn = document.getElementById('showHomeView')

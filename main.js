@@ -3,14 +3,10 @@ const { app, BrowserWindow, Menu, ipcMain } =  require('electron')
 const { setMainMenu } = require('./src/menu.js')
 const exec = require('child_process').exec;
 
-//         
+//
 
 // Define los comandos que deseas ejecutar y su identificador asociado
 const commands = {
-    win32: {
-        getWindowsType: 'wmic os get caption | findstr /v "Caption"',
-        getWindowsHomeFiles: 'chcp 65001 & dir /a /b C:\\Users\\%USERNAME% | findstr /I /V /R "^\\..* ^ntuser.* ^NTUSER.*" | findstr /V /C:"Página de códigos activa: 65001"',
-    },
     linux: {
         getLinuxDesktop: 'echo $XDG_SESSION_DESKTOP',
         getLinuxDistro: 'lsb_release -d | awk -F"\t" \'{print $2}\' | awk \'{print $1, $2}\'',
@@ -22,9 +18,6 @@ const commands = {
         getLinuxMusicFiles: 'ls -1 $HOME/Music',
         getLinuxPhotosFiles: 'ls -1 $HOME/Pictures',
         getLinuxVideosFiles: 'ls -1 $HOME/Videos'
-    },
-    darwin: {
-        // Agrega comandos específicos de macOS si es necesario
     }
 };
 
@@ -48,7 +41,7 @@ const executeCommand = (command) => {
 
 // Define los manejadores de eventos para cada comando
 ipcMain.handle('executeCommand', async (event, commandName) => {
-    const command = getCommandForPlatform(commandName);
+    const command = getCommandForPlatform(commandName)
     if (!command) {
         console.error(`Command not found: ${commandName}`);
         return null;
@@ -58,7 +51,7 @@ ipcMain.handle('executeCommand', async (event, commandName) => {
 
 // Función para obtener el comando correspondiente a la plataforma actual
 const getCommandForPlatform = (commandName) => {
-    const platformCommands = commands[process.platform];
+    const platformCommands = commands.linux; // Solo Linux
     return platformCommands ? platformCommands[commandName] : null;
 };
 
@@ -74,8 +67,6 @@ ipcMain.on('executeCommandWithoutResponse', (event, commandName) => {
     executeCommand(commandName)
         .catch(error => console.error(`Execute command ${commandName} error:`, error));
 });
-
-
 
 
 const createWindow = () => {
