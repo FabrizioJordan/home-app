@@ -22,7 +22,7 @@
   "license": "ISC",
   "icon": "public/icons/home1024x.png",
   "scripts": {
-    "dev": "electron .",
+    "dev": "concurrently \"tailwindcss -i ./styles.css -o ./src/output.css --watch\" \"electron .\"",
     "start": "electron-forge start",
     "package": "electron-forge package --arch=x64 --platform=linux",
     "clean": "node ./src/scripts/clean.js",
@@ -40,7 +40,10 @@
       "executableName": "home-app",
       "category": "Productivity",
       "icon": "public/icons/home1024x.png",
-      "target": ["deb", "AppImage"]
+      "target": [
+        "deb",
+        "AppImage"
+      ]
     }
   },
   "devDependencies": {
@@ -51,9 +54,10 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "^30.0.3",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.1",
     "electron-builder": "^25.1.8",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1"

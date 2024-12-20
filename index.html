@@ -14,10 +14,6 @@
     <link rel="stylesheet" href="./src/output.css">
     <script defer src="./renderer.js"></script>
     <title>Desktop App</title>
-    <style>
-        .view { display: none; }
-        .view.active { display: flex; }
-    </style>
 </head>
 <body class="body relative w-full h-screen bg-[#121417] text-white flex flex-row tracking-wide">
 
@@ -83,9 +79,9 @@
                         <a id="showHomeView" href="">
                             Home
                         </a>
-                        <a href="">
+                        <button id="infoBtn" class="">
                             Info
-                        </a>
+                        </button>
                     </nav>
                 </article>
                 
@@ -99,7 +95,7 @@
 
                         <span class="p-4 py-2">
                             <button id="changeDesktop" class="relative text-sm flex flex-col justify-center items-center gap-1">
-                                <p class="systemType">Desktop Manager</p>
+                                <p id="systemType">Desktop Manager</p>
                                 <p id="windowManager" class="text-[#9EABB8]">Window Manager</p>
 
                                 <nav id="menuDesktop" class="hidden flex flex-col justify-center items-center absolute top-12 right-8 gap-4 bg-[#4b4f57] rounded-md p-2 text-xs cursor-auto
@@ -124,27 +120,11 @@
         <section id="mainHome" class=" flex flex-col gap-8">
 
             <article>
-                <header class="[&>*]:text-2xl [&>*]:font-semibold">
-                    <h1 class="homeView">Home</h1>
-                    <h1 class="documentsView">Documentos</h1>
-                    <h1 class="downloadsView">Descargas</h1>
-                    <h1 class="musicView">Musica</h1>
-                    <h1 class="photosView">Fotos</h1>
-                    <h1 class="videosView">Videos</h1>
-                </header>
     
                 <nav class="text-sm flex flex-row gap-8 justify-start items-center py-4 px-2 
                 [&_button]:flex [&_button]:flex-col-reverse [&_burton]:justify-start [&_button]:items-start [&_button]:gap-2
                 [&_img]:size-24 [&_img]:min-w-24 [&_img]:min-h-24 [&_img]:rounded-lg
                 xl:[&_img]:size-32">
-                        <button id="showDocumentsView">
-                            Documentos
-                            <img class="" src="./public/images/user-dirs/documents.jpg" alt="">
-                        </button>
-                        <button id="showDownloadsView">
-                            Descargas
-                            <img class="" src="./public/images/user-dirs/downloads.jpg" alt="">
-                        </button>
                         <button id="showMusicView">
                             Musica
                             <img class="" src="./public/images/user-dirs/music.jpg" alt="">
@@ -159,54 +139,6 @@
                         </button>
                 </nav>
     
-            </article>
-
-            <article class="documentsView rounded-lg bg-[#202020] [&>*]:py-1 [&>*]:px-1 gap-4 mb-4 mr-4">
-                <div class="terminal_toolbar h-[30px] flex justify-between items-center bg-[#2d2d2d]">
-                    <div class="flex items-center 
-                    [&>button]:flex [&>button]:justify-center [&>button]:items-center [&>button]:size-3 [&>button]:">
-                        <button class="btn btn-color"></button>
-                        <button class="btn"></button>
-                        <button class="btn"></button>
-                    </div>
-                    <div class="">
-                        <p class="text-green-500 userConsole">user@User</p>
-                    </div>
-                    <pre>
-                    </pre>
-                </div>
-
-                <div class="flex flex-row gap-x-1 text-sm">
-                    <p class="text-green-500"><span class="userConsole">user@User</span>:∼$</p>
-                    <h3 id="">ls -lah</h3>
-                </div>
-        
-                <ul id="listOfDocumentsFiles" class="text-sm grid grid-cols-3 gap-4 gap-x-2 justify-start items-center py-2">
-                </ul>
-            </article>
-
-            <article class="downloadsView rounded-lg bg-[#202020] [&>*]:py-1 [&>*]:px-1 gap-4 mb-4 mr-4">
-                <div class="terminal_toolbar h-[30px] flex justify-between items-center bg-[#2d2d2d]">
-                    <div class="flex items-center 
-                    [&>button]:flex [&>button]:justify-center [&>button]:items-center [&>button]:size-3 [&>button]:">
-                        <button class="btn btn-color"></button>
-                        <button class="btn"></button>
-                        <button class="btn"></button>
-                    </div>
-                    <div class="">
-                        <p class="text-green-500 userConsole">user@User</p>
-                    </div>
-                    <pre>
-                    </pre>
-                </div>
-
-                <div class="flex flex-row gap-x-1 text-sm">
-                    <p class="text-green-500"><span class="userConsole">user@User</span>:∼$</p>
-                    <h3 id="">ls -lah</h3>
-                </div>
-        
-                <ul id="listOfDownloadsFiles" class="text-sm grid grid-cols-3 gap-4 gap-x-2 justify-start items-center py-2">
-                </ul>
             </article>
 
             <article class="musicView rounded-lg bg-[#202020] [&>*]:py-1 [&>*]:px-1 gap-4 mb-4 mr-4">
@@ -230,6 +162,7 @@
                 </div>
         
                 <ul id="listOfMusicFiles" class="text-sm grid grid-cols-3 gap-4 gap-x-2 justify-start items-center py-2">
+                    
                 </ul>
             </article>
 
@@ -285,7 +218,20 @@
 
     </main>
 
-    
+    <div id="popUp" class="absolute z-50 w-full h-full bg-[#000000d9] flex justify-center items-center">
+
+        <div class="absolute top-6 left-6 bg-[#464646] font-extrabold rounded-lg">
+            <button id="closePopUpBtn" class="px-2 py-1">X</button>
+        </div>
+
+        <div class="bg-[#464646] rounded-lg py-6 px-6 max-w-[80%] max-h-[80%] m-auto">
+            <div id="popUpContent" class="">
+                
+            </div>
+        </div>
+    </div>
+
+    <!--
     <div id="divLoader" class="z-50 absolute top-0 right-0 left-0 w-full h-full bg-[#3b3b3b] flex flex-col gap-8 text-center justify-center items-center transition-all duration-1000">
         <div class="spinner">
             <div></div>
@@ -297,6 +243,6 @@
         </div>
         <div class="loader"></div>
     </div>
-    
+    -->
 </body>
 </html>

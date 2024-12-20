@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, BrowserWindow, Menu, ipcMain } =  require('electron')
+const { app, BrowserWindow, ipcMain } =  require('electron')
 const { setMainMenu } = require('./src/menu.js')
 const exec = require('child_process').exec;
 
@@ -12,12 +12,9 @@ const commands = {
         getLinuxDistro: 'lsb_release -d | awk -F"\t" \'{print $2}\' | awk \'{print $1, $2}\'',
         getLinuxWM: "wmctrl -m | awk -F' ' '{print $2}' | head -n 1",
         getLinuxUserName: 'whoami',
-        getLinuxHomeFiles: 'ls -lah',
-        getLinuxDocumentsFiles: 'ls -1 $HOME/Documents',
-        getLinuxDownloadsFiles: 'ls -1 $HOME/Downloads',
-        getLinuxMusicFiles: 'ls -1 $HOME/Music',
-        getLinuxPhotosFiles: 'ls -1 $HOME/Pictures',
-        getLinuxVideosFiles: 'ls -1 $HOME/Videos'
+        getMusicFiles: 'ls -1 $HOME/Music',
+        getPhotosFiles: 'ls -1 $HOME/Pictures',
+        getVideosFiles: 'ls -1 $HOME/Videos'
     }
 };
 
@@ -85,8 +82,13 @@ const createWindow = () => {
     mainWindow.loadFile('index.html')
 
     mainWindow.maximize()
-      
+
+    
     setMainMenu(mainWindow)
+    // Open the DevTools.
+    // mainWindow.webContents.openDevTools()
+
+      
 }
 
 app.whenReady().then(() => {

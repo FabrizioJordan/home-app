@@ -21,10 +21,7 @@ $button.addEventListener('click', () => {
   $count.innerHTML = (count + 1).toString()
 })
 */
-
-const platform = process.platform;
     
-
  // Función para ejecutar un comando y manejar el resultado
 window.executeAndHandleResult = async (commandName, resultHandler) => {
     try {
@@ -37,7 +34,7 @@ window.executeAndHandleResult = async (commandName, resultHandler) => {
     }
 };
 
-
+/*
 if(platform === "win32"){
     // Ejemplo de cómo usar la función para ejecutar y manejar un comando
 executeAndHandleResult('getWindowsType', windowsType => {
@@ -51,7 +48,7 @@ executeAndHandleResult('getWindowsType', windowsType => {
 
     });
 }
-
+*/
 
     // Función para ejecutar un comando sin esperar una respuesta
     const executeCommandWithoutResponse = (commandName) => {
@@ -133,20 +130,34 @@ function newSystemTerminal(){
             }
         }
 
-    // Function to get the desktop manager
-    executeAndHandleResult('getLinuxDesktop', linuxDesktop => {
-        $('.systemType').innerHTML = linuxDesktop
-    });
 
     // Function to get the user name
     executeAndHandleResult('getLinuxUserName', userName => {
         $('#userName').innerHTML = userName;
     });
 
+    // Function to get the desktop manager
+    executeAndHandleResult('getLinuxDesktop', linuxDesktop => {
+        $('#systemType').innerHTML = linuxDesktop
+    });
+
     // Function to get the window manager
     executeAndHandleResult('getLinuxWM', linuxWM => {
         $('#windowManager').innerHTML = linuxWM;
     });
+
+    
+// changeDesktop
+$('#changeDesktop').addEventListener('click', () => {
+    $('#menuDesktop').classList.toggle('hidden')
+})
+
+$('#btnChangeDesktop').addEventListener('click', () => {              //cambiar escritorio
+    executeCommandWithoutResponse('bspc quit');
+    executeCommandWithoutResponse('cinnamon-session-quit --no-prompt');
+})
+
+
 
 
 
@@ -187,19 +198,52 @@ window.addEventListener('load', () => {
 });
 
 
-
-// changeDesktop
-$('#changeDesktop').addEventListener('click', () => {
-    $('#menuDesktop').classList.toggle('hidden')
+$('#closePopUpBtn').addEventListener('click', () => {
+    closePopUp()
 })
 
-    $('#btnChangeDesktop').addEventListener('click', () => {              //cambiar escritorio
-        executeCommandWithoutResponse('bspc quit');
-        executeCommandWithoutResponse('cinnamon-session-quit --no-prompt');
-    })
+function closePopUp(){
+    $('#popUp').classList.add('hidden')
+}
+
+function openPopUp(){
+    $('#popUp').classList.remove('hidden')
+}
+
+$('infoBtn').addEventListener('click', () => {
+    openPopUp()
+    $('popUpContent').innerHTML = `
+        <h4 class="text-xl font-medium">Información</h4>
+                <nav>
+                    <ul class="flex justify-center items-center gap-4">
+                        <li>
+                            <a class="" href="">
+                                <img class="w-6 h-6" src="./public/icons/other-icons/github-white.svg" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="">
+                                <img class="w-6 h-6" src="./public/icons/other-icons/envelope-white.svg" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="">
+                    
+                </p>
+    `
+})
+
+function putInfoContent(){
+    // Código para mostrar el contenido de la información
+    
+}
+
 
 
 // loader
+
+/*
 setTimeout(() => {
     $('#divLoader').classList.add('divLoader-out');
 
@@ -207,7 +251,7 @@ setTimeout(() => {
         $('#divLoader').classList.add('hidden');
     }, 1500);
 }, 500)
-
+*/
 
 /*
 /// Listado de archivos en Windows
@@ -229,10 +273,7 @@ executeAndHandleResult('getWindowsHomeFiles', files => {
 
 const userConsole = document.querySelectorAll('.userConsole')
 for(let a = 0; a < userConsole.length; a++) {
-    userConsole[a].innerHTML = "user";
-    if(userConsole[a].tagName === 'SPAN') {
-        userConsole[a].innerHTML = "User";
-    }
+    userConsole[a].innerHTML = "User";
 }
 
 
@@ -248,6 +289,9 @@ if(langProcess === "en_US"){
 
 
 
+
+
+// info view
 
 
 
