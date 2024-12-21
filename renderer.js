@@ -4,9 +4,9 @@ const $ = selector => document.querySelector(selector)
 
 
 // variables 
-const $musicBtn = document.getElementById('showMusicView')
-const $photosBtn = document.getElementById('showPhotosView')
-const $videosBtn = document.getElementById('showVideosView')
+const $musicBtn = $('#showMusicView')
+const $photosBtn = $('#showPhotosView')
+const $videosBtn = $('#showVideosView')
 
 
 /*

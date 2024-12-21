@@ -265,6 +265,7 @@ document.addEventListener('keydown', function(event) {
     }
 })
 
+
 // loader
 
 setTimeout(() => {
@@ -273,7 +274,7 @@ setTimeout(() => {
     setTimeout(() => {
         $('#divLoader').classList.add('hidden');
     }, 1500);
-}, 500)
+}, 1000)
 
 /*
 /// Listado de archivos en Windows
