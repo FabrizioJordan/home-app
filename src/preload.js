@@ -198,52 +198,75 @@ window.addEventListener('load', () => {
 });
 
 
+// POP UP 
+
+
 $('#closePopUpBtn').addEventListener('click', () => {
     closePopUp()
 })
 
 function closePopUp(){
     $('#popUp').classList.add('hidden')
+    const content = ` `
+    putInfoContent(content)
 }
 
 function openPopUp(){
     $('#popUp').classList.remove('hidden')
 }
 
-$('infoBtn').addEventListener('click', () => {
+$('#infoBtn').addEventListener('click', () => {
     openPopUp()
-    $('popUpContent').innerHTML = `
-        <h4 class="text-xl font-medium">Información</h4>
+    const content = `
+        <h4 class="text-xl font-semibold tracking-wider">About us</h4>
                 <nav>
                     <ul class="flex justify-center items-center gap-4">
                         <li>
-                            <a class="" href="">
+                            <button id="githubVisitBtn">
                                 <img class="w-6 h-6" src="./public/icons/other-icons/github-white.svg" alt="">
-                            </a>
+                            </button>
                         </li>
                         <li>
-                            <a class="" href="">
+                            <button id="gmailVisitBtn">
                                 <img class="w-6 h-6" src="./public/icons/other-icons/envelope-white.svg" alt="">
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </nav>
                 <p class="">
-                    
+                    Home desktop app for daily Linux use.
+                </p>
+                <p>
+                    Built with <span class="font-medium text-[#ffdddd]">ElectronJS</span> & <span class="font-medium text-[#b8ffe1]">TailwindCSS</span>.
                 </p>
     `
+    putInfoContent(content)
+
+    $('#githubVisitBtn').addEventListener('click', () => {
+        window.open('https://github.com/fabriziojordan', '_blank');
+    })
+    
+    $('#gmailVisitBtn').addEventListener('click', () => {
+        window.open('mailto:fabriziodevjordan@gmail.com', '_blank');
+    })
+    
 })
 
-function putInfoContent(){
+
+function putInfoContent(content){
     // Código para mostrar el contenido de la información
-    
+    $('#popUpContent').innerHTML = content
 }
 
-
+document.addEventListener('keydown', function(event) {
+    let key = event.key;
+    if (key === 'Escape') {
+        closePopUp()
+    }
+})
 
 // loader
 
-/*
 setTimeout(() => {
     $('#divLoader').classList.add('divLoader-out');
 
@@ -251,7 +274,6 @@ setTimeout(() => {
         $('#divLoader').classList.add('hidden');
     }, 1500);
 }, 500)
-*/
 
 /*
 /// Listado de archivos en Windows

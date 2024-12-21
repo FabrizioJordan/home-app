@@ -218,20 +218,21 @@
 
     </main>
 
-    <div id="popUp" class="absolute z-50 w-full h-full bg-[#000000d9] flex justify-center items-center">
+    <div id="popUp" class="hidden absolute z-50 w-full h-full bg-[#000000d9] flex justify-center items-center">
 
         <div class="absolute top-6 left-6 bg-[#464646] font-extrabold rounded-lg">
-            <button id="closePopUpBtn" class="px-2 py-1">X</button>
+            <button id="closePopUpBtn" class="px-2 py-2">
+                <img class="w-8 h-8" src="./public/icons/other-icons/x-mark.svg" alt="">
+            </button>
         </div>
 
         <div class="bg-[#464646] rounded-lg py-6 px-6 max-w-[80%] max-h-[80%] m-auto">
-            <div id="popUpContent" class="">
+            <div id="popUpContent" class="max-w-96 flex flex-col gap-4 justify-center items-center">
                 
             </div>
         </div>
     </div>
 
-    <!--
     <div id="divLoader" class="z-50 absolute top-0 right-0 left-0 w-full h-full bg-[#3b3b3b] flex flex-col gap-8 text-center justify-center items-center transition-all duration-1000">
         <div class="spinner">
             <div></div>
@@ -243,6 +244,6 @@
         </div>
         <div class="loader"></div>
     </div>
-    -->
+    
 </body>
 </html>
